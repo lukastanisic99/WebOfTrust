@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "outDir": "./dist",
+    "target": "es6",
+    "downlevelIteration": true,
+    "module": "esnext",
+    "jsx": "react",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "baseUrl": "./src/",
+    "paths": {
+      "pages": ["./pages"],
+      "pagesAdmin": ["./pagesAdmin"],
+      "shared": ["./shared"],
+      "sharedAdmin": ["./sharedAdmin"],
+      "styles": ["./styles"],
+      "assets": ["./assets"],
+      "utils": ["./utils"],
+      "constants": ["./constants"],
+      "context": ["./context"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "generators/plopfile.js", "./typechain/types", "hardhat.config.js", "scripts/deploy.js", "src/views/Dashboard.js"],
+  "exclude": ["node_modules"],
+  "*": ["node_modules/*"]
+}

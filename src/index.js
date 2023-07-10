@@ -27,6 +27,7 @@ import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import AdminLayout from "layouts/Admin.js";
+import Signup from "views/Signup";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -34,7 +35,14 @@ root.render(
   <BrowserRouter>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Route path="/signup" render={(props) => <Signup {...props} />} />
+      {/* <Redirect from="/" to="/admin/dashboard" /> */}
+      {localStorage.getItem("user") ? (
+        <Redirect from="/" to="/admin/dashboard" />
+      ) : (
+        <Redirect from="/" to="/signup" />
+      )}
+      {/* <Redirect from="/" to="/signup" /> */}
     </Switch>
   </BrowserRouter>
 );

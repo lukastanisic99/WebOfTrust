@@ -36,6 +36,7 @@ function Admin() {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
+        console.log("Admin - props ::", prop);
         return (
           <Route
             path={prop.layout + prop.path}
