@@ -1,7 +1,7 @@
 import React from "react";
 import ChartistGraph from "react-chartist";
 import x from "../p2p/test";
-import BrowserP2P from "../p2p/p2ptest";
+import BrowserP2P from "../p2p/BrowserP2P";
 
 // react-bootstrap components
 import {
@@ -18,11 +18,11 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import Graph from "components/Graph";
+import GraphComponent from "components/Graph";
 
 function Dashboard() {
   x();
-  let p = new BrowserP2P();
+  // let p = new BrowserP2P();
   return (
     <>
       <Container fluid>
@@ -141,7 +141,7 @@ function Dashboard() {
                 <p className="card-category">Web of Trust</p>
               </Card.Header>
               <Card.Body>
-                <Graph></Graph>
+                <GraphComponent></GraphComponent>
               </Card.Body>
               <Card.Footer>
                 <div className="legend">

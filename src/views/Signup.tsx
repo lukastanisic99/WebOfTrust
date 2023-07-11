@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import Account from '../p2p/Account'
 // react-bootstrap components
 import {
   Button,
@@ -13,11 +14,13 @@ import {
 function Signup() {
 
     const [name, setName] = React.useState("");
-
-    let signup = () => {
-        localStorage.setItem('user',name)
-        console.log(name)
-        return <Redirect to='/admin/dashboard'/>
+    let history = useHistory();
+  
+  let signup = () => {
+    let acc = new Account(name);
+    acc.persistAccount();
+      //console.log(name);
+    history.push('/user/dashboard')
     }
 
   return (

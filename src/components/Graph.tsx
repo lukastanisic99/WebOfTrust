@@ -1,13 +1,13 @@
 import * as React from "react";
 import AnyChart from 'anychart-react'
-
-const Graph: React.FC = () => {
+import Graph, { Node, Edge } from '../p2p/Graph';
+const GraphComponent: React.FC = () => {
   return (
     <div>
-      <AnyChart type="graph" data={nodes_JSON} nodes={{
+      <AnyChart type="graph" data={graph} nodes={{
         labels: {
           enabled: true,
-          format: '{%label}',
+          format: '{%name}',
           fontColor: '#000',
           fontSize:16
         },
@@ -104,5 +104,12 @@ const nodes_JSON = {
 
 ]
 };
+let graph = new Graph();
+nodes_JSON.nodes.map((node) => {
+  graph.insertNode(node.id,node.label,123,node.customObject)
+})
+nodes_JSON.edges.map((edge) => {
+  graph.insertEdge(edge.from,edge.to)
+})
 
-export default Graph;
+export default GraphComponent;

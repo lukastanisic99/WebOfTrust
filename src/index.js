@@ -29,16 +29,18 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AdminLayout from "layouts/Admin.js";
 import Signup from "views/Signup";
 
+import Account from "./p2p/Account";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route path="/user" render={(props) => <AdminLayout {...props} />} />
       <Route path="/signup" render={(props) => <Signup {...props} />} />
       {/* <Redirect from="/" to="/admin/dashboard" /> */}
-      {localStorage.getItem("user") ? (
-        <Redirect from="/" to="/admin/dashboard" />
+      {Account.getAccount() ? (
+        <Redirect from="/" to="/user/dashboard" />
       ) : (
         <Redirect from="/" to="/signup" />
       )}

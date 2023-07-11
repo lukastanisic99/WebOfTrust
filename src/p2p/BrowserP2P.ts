@@ -8,14 +8,16 @@ class BrowserP2P {
   swarm;
   sockets: Map<string, Stream> = new Map<string, Stream>();
   address: string;
-  public constructor(topic: string = "Test topic") {
+  public constructor(seed: string, userID: number) {
     let ws = new WebSocket("wss://dht1-relay.leet.ar:49443/");
     this.dht = new DHT(new Stream(true, ws));
+    // this.dht.keyPair(Buffer.alloc(32).fill(seed));
     this.swarm = new Hyperswarm({
       dht: this.dht,
+      seed: Buffer.alloc(32).fill(seed),
     });
     this.address = Buffer.from(this.swarm.keyPair.publicKey).toString("hex");
-    console.log(this.address);
+    console.log("Address", this.address);
 
     this.swarm.on("connection", (conn: Stream, info: PeerInfo) => {
       let key = Buffer.from(info.publicKey).toString("hex");
@@ -27,7 +29,7 @@ class BrowserP2P {
       });
     });
 
-    const connTopic = Buffer.alloc(32).fill(topic); // A topic must be 32 bytes
+    const connTopic = Buffer.alloc(32).fill(userID.toString()); // A topic must be 32 bytes
     const discovery = this.swarm.join(connTopic, {
       server: true,
       client: true,

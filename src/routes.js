@@ -39,7 +39,7 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
-    layout: "/admin",
+    layout: "/user",
   },
   {
     path: "/user",
@@ -84,7 +84,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/signup",
+    path: "/signupp",
     name: "Signup",
     icon: "nc-icon nc-bell-55",
     component: Signup,

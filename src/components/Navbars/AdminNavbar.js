@@ -16,13 +16,16 @@
 
 */
 import React, { Component } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 
 import routes from "routes.js";
 
+import Account from "../../p2p/Account";
+
 function Header() {
   const location = useLocation();
+  let history = useHistory();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
     document.documentElement.classList.toggle("nav-open");
@@ -195,8 +198,10 @@ function Header() {
             <Nav.Item>
               <Nav.Link
                 className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => {
+                  Account.clearAccount();
+                  history.push("/signup");
+                }}
               >
                 <span className="no-icon">Log out</span>
               </Nav.Link>

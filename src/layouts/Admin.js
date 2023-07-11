@@ -27,16 +27,22 @@ import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
+import BrowserP2P from "../p2p/BrowserP2P";
+import Account from "../p2p/Account";
+
 function Admin() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
+  const acc = Account.getAccount();
+  let p2p = null;
+  if (acc) p2p = new BrowserP2P(acc.seed, acc.userID);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        console.log("Admin - props ::", prop);
+      if (prop.layout === "/user") {
+        console.log("Admin - props ::", prop, routes);
         return (
           <Route
             path={prop.layout + prop.path}
