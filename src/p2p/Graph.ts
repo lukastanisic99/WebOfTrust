@@ -44,18 +44,17 @@ class Graph {
     let graphObj = JSON.parse(graphString);
     console.log("DeepCopy GraphObj", graphObj);
     let graph = new Graph();
-    let nodes = [];
     for (let i = 0; i < graphObj.nodes.length; i++) {
       let n = graphObj.nodes[i];
-      nodes.push(new Node(n.id, n.name, n.userID, n.metadata));
+      graph.nodes.push(
+        Object.assign(new Node(n.id, n.name, n.userID, n.metadata), n)
+      );
     }
-    let edges = [];
     for (let i = 0; i < graphObj.edges.length; i++) {
       let e = graphObj.edges[i];
-      edges.push(new Edge(e.from, e.to));
+      graph.edges.push(new Edge(e.from, e.to));
     }
-    graph = Object.assign(graph, nodes);
-    return Object.assign(graph, edges);
+    return graph;
   }
   public static getGraph(): Graph {
     let g = localStorage.getItem("graph");
