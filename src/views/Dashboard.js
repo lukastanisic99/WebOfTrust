@@ -2,7 +2,7 @@ import React from "react";
 import ChartistGraph from "react-chartist";
 import x from "../p2p/test";
 import BrowserP2P from "../p2p/BrowserP2P";
-
+import Account from "../p2p/Account";
 // react-bootstrap components
 import {
   Badge,
@@ -20,8 +20,13 @@ import {
 } from "react-bootstrap";
 import GraphComponent from "components/Graph";
 
-function Dashboard() {
-  x();
+function Dashboard({ ...props }) {
+  // let acc = Account.getAccount();
+  console.log("DASHBOARD props ---->", props);
+  const acc = props.acc;
+  const graph = props.graph;
+  console.log("ACC PROP PASSED", acc);
+  console.log("GRAPH DAHBOARD passed", graph);
   // let p = new BrowserP2P();
   return (
     <>
@@ -34,13 +39,13 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-chart text-warning"></i>
+                      <i className="nc-icon nc-light-3 text-success"></i>
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Storage Used</p>
-                      <Card.Title as="h4">150GB</Card.Title>
+                      <p className="card-category">Discovery ID</p>
+                      <Card.Title as="h4">{acc.userID}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -48,8 +53,8 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update Now
+                  <i className="far fa-calendar-alt mr-1"></i>
+                  Last day
                 </div>
               </Card.Footer>
             </Card>
@@ -112,13 +117,13 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-light-3 text-success"></i>
+                      <i className="nc-icon nc-chart text-warning"></i>
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Discoverable</p>
-                      <Card.Title as="h4">$ 1,345</Card.Title>
+                      <p className="card-category">Storage Used</p>
+                      <Card.Title as="h4">150GB</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -126,8 +131,8 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Last day
+                  <i className="fas fa-redo mr-1"></i>
+                  Update Now
                 </div>
               </Card.Footer>
             </Card>
@@ -141,7 +146,7 @@ function Dashboard() {
                 <p className="card-category">Web of Trust</p>
               </Card.Header>
               <Card.Body>
-                <GraphComponent></GraphComponent>
+                <GraphComponent graph={graph}></GraphComponent>
               </Card.Body>
               <Card.Footer>
                 <div className="legend">

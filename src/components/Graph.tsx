@@ -1,7 +1,7 @@
 import * as React from "react";
 import AnyChart from 'anychart-react'
 import Graph, { Node, Edge } from '../p2p/Graph';
-const GraphComponent: React.FC = () => {
+const GraphComponent: React.FC<{graph:Graph}> = ({graph}) => {
   return (
     <div>
       <AnyChart type="graph" data={graph} nodes={{
@@ -104,12 +104,12 @@ const nodes_JSON = {
 
 ]
 };
-let graph = new Graph();
-nodes_JSON.nodes.map((node) => {
-  graph.insertNode(node.id,node.label,123,node.customObject)
-})
-nodes_JSON.edges.map((edge) => {
-  graph.insertEdge(edge.from,edge.to)
-})
+// let graph2 = new Graph();
+// nodes_JSON.nodes.map((node) => {
+//   graph2.insertNode(node.id,node.label,123,node.customObject)
+// })
+// nodes_JSON.edges.map((edge) => {
+//   graph2.insertEdge(edge.from,edge.to)
+// })
 
 export default GraphComponent;
