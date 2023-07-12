@@ -17,6 +17,7 @@ const GraphComponent: React.FC<{graph:Graph}> = ({graph}) => {
           }
       }}
         width={'100%'}
+        height={300}
       ></AnyChart>
     </div>
   );

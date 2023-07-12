@@ -1331,24 +1331,43 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperswarm/dht-relay@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@hyperswarm/dht-relay/-/dht-relay-0.4.1.tgz#146659f4f2e93acdcd3264a82334ab02aaef63ae"
-  integrity sha512-jvP6LkUH0DVbKG5pO1jbsaNmrWObjVLaCXSocqILf7pUXpAmiSOJhLblT5BUVqDzEjNHM8v7cfHLbO79EAfsqA==
+"@hyperswarm/dht-relay@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@hyperswarm/dht-relay/-/dht-relay-0.3.0.tgz#3b5a72b1f7502ac106d0d668974a643c59f6a9c9"
+  integrity sha512-HOg8B+WNdI0/l6LCDdXhau7BmMhd0Eq//EvmlMvR1MlwJ7T8YCDaXm1EeqCnOSvTf7/DP90O8Jd23yXd3B9OiQ==
   dependencies:
+    "@hyperswarm/dht" "^6.0.1"
     "@hyperswarm/secret-stream" "^6.0.0"
     b4a "^1.1.4"
     compact-encoding "^2.6.1"
     compact-encoding-net "^1.0.1"
     events "^3.3.0"
-    graceful-goodbye "^1.2.1"
-    hyperdht "^6.5.2"
     protomux "^3.1.1"
     safety-catch "^1.0.1"
-    sodium-universal "^4.0.0"
+    sodium-universal "^3.0.4"
     streamx "^2.11.3"
     timeout-refresh "^2.0.1"
-    ws "^8.12.1"
+
+"@hyperswarm/dht@^6.0.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@hyperswarm/dht/-/dht-6.5.1.tgz#07e144590f532c2f872e3617117d17f266b2f7a4"
+  integrity sha512-TTTOzuwqbmXNwl+b2FXeHCoR2QS1sqxQvqXwv2i54sdEkKmF8f8t4U8PsRGk5PUO3qA6GxlMThvXixg9Fgs4Yw==
+  dependencies:
+    "@hyperswarm/secret-stream" "^6.0.0"
+    b4a "^1.3.1"
+    bogon "^1.0.0"
+    compact-encoding "^2.4.1"
+    compact-encoding-net "^1.0.1"
+    debugging-stream "^2.0.0"
+    dht-rpc "^6.6.3"
+    events "^3.3.0"
+    hypercore-crypto "^3.3.0"
+    noise-curve-ed "^2.0.0"
+    noise-handshake "^3.0.0"
+    record-cache "^1.1.1"
+    safety-catch "^1.0.1"
+    sodium-universal "^4.0.0"
+    xache "^1.1.0"
 
 "@hyperswarm/secret-stream@^6.0.0":
   version "6.2.0"
@@ -4221,7 +4240,7 @@ detect-port-alt@^1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-dht-rpc@^6.7.0:
+dht-rpc@^6.6.3:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/dht-rpc/-/dht-rpc-6.7.0.tgz#4f8feb374bc0b37515360813b881cf4191108b1c"
   integrity sha512-owzv0fEPFD+5xkkm5fpD9i1tRcpxY8SbAhM+JHnDlcICuNMaPWvzUI+2fg4su6YteKXlShshsAEGy//vfT7pHg==
@@ -5644,13 +5663,6 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6,
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
-graceful-goodbye@^1.2.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/graceful-goodbye/-/graceful-goodbye-1.3.0.tgz#b15e4755997683f92468d486809403b69b571447"
-  integrity sha512-hcZOs20emYlTM7MmUE0FpuZcjlk2GPsR+UYTHDeWxtGjXcbh2CawGi8vlzqsIvspqAbot7mRv3sC/uhgtKc4hQ==
-  dependencies:
-    safety-catch "^1.0.2"
-
 graphemer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
@@ -5989,35 +6001,14 @@ hypercore-crypto@^3.3.0, hypercore-crypto@^3.3.1:
     compact-encoding "^2.5.1"
     sodium-universal "^4.0.0"
 
-hyperdht@^6.5.2, hyperdht@^6.6.0:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/hyperdht/-/hyperdht-6.6.1.tgz#ba297b0b8d9ce404926e704d7fdb1ed30fa44f0a"
-  integrity sha512-ckt2aVN7jBEFSmRKEAn2Crskue/6vUMQ6jLMOasuQrbTk8gVP/93VcijBrda9D8SfHTw19HTK7TEfH1o8k49yA==
+hyperswarm@4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/hyperswarm/-/hyperswarm-4.3.5.tgz#3818bdf754ad68c345ed7f666938dea6458e977c"
+  integrity sha512-vX5VPpRmN9cbDOJ3p+Jn/+V8ilJmkBYkmehM9oZEZZdtXZV5SfIPA7OMaN9NfXTuRKlxVGHr00S724Ct7BGK/Q==
   dependencies:
-    "@hyperswarm/secret-stream" "^6.0.0"
-    b4a "^1.3.1"
-    bogon "^1.0.0"
-    compact-encoding "^2.4.1"
-    compact-encoding-net "^1.0.1"
-    debugging-stream "^2.0.0"
-    dht-rpc "^6.7.0"
-    events "^3.3.0"
-    hypercore-crypto "^3.3.0"
-    noise-curve-ed "^2.0.0"
-    noise-handshake "^3.0.0"
-    record-cache "^1.1.1"
-    safety-catch "^1.0.1"
-    sodium-universal "^4.0.0"
-    xache "^1.1.0"
-
-hyperswarm@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/hyperswarm/-/hyperswarm-4.5.1.tgz#6a9bb80ad4c9593776bc3a7762780d6967a66316"
-  integrity sha512-XfpupxUUml1sIH2wKSH4Cb4kHjzRpGkKl0zPE7lTOFYUUW50YM4e574prlhu/xcEPPP2e9n3GupPaku6PzWgsg==
-  dependencies:
+    "@hyperswarm/dht" "^6.0.1"
     b4a "^1.3.1"
     events "^3.3.0"
-    hyperdht "^6.6.0"
     safety-catch "^1.0.2"
     shuffled-priority-queue "^2.1.0"
 
@@ -7781,7 +7772,7 @@ node-forge@^1:
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-1.3.1.tgz#be8da2af243b2417d5f646a770663a92b7e9ded3"
   integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
 
-node-gyp-build@^4.4.0, node-gyp-build@^4.6.0:
+node-gyp-build@^4.3.0, node-gyp-build@^4.4.0, node-gyp-build@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.6.0.tgz#0c52e4cbf54bbd28b709820ef7b6a3c2d6209055"
   integrity sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==
@@ -9654,7 +9645,7 @@ resolve.exports@^1.1.0:
   resolved "https://registry.yarnpkg.com/resolve.exports/-/resolve.exports-1.1.1.tgz#05cfd5b3edf641571fd46fa608b610dda9ead999"
   integrity sha512-/NtpHNDN7jWhAaQ9BvBUYZ6YTXsRBgfqWFWP7BZBaoMJO/I3G5OFzvTuWNlZC3aPjins1F+TNrLKsGbH4rfsRQ==
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.22.2, resolve@^1.4.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.22.2, resolve@^1.4.0:
   version "1.22.2"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.2.tgz#0ed0943d4e301867955766c9f3e1ae6d01c6845f"
   integrity sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==
@@ -10108,6 +10099,13 @@ sodium-javascript@~0.8.0:
     siphash24 "^1.0.1"
     xsalsa20 "^1.0.0"
 
+sodium-native@^3.2.0:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/sodium-native/-/sodium-native-3.4.1.tgz#44616c07ccecea15195f553af88b3e574b659741"
+  integrity sha512-PaNN/roiFWzVVTL6OqjzYct38NSXewdl2wz8SRB51Br/MLIJPrbM3XexhVWkq7D3UWMysfrhKVf1v1phZq6MeQ==
+  dependencies:
+    node-gyp-build "^4.3.0"
+
 sodium-native@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/sodium-native/-/sodium-native-4.0.4.tgz#561b7c39c97789f8202d6fd224845fe2e8cd6879"
@@ -10122,6 +10120,22 @@ sodium-secretstream@^1.1.0:
   dependencies:
     b4a "^1.1.1"
     sodium-universal "^4.0.0"
+
+sodium-universal@^3.0.4:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/sodium-universal/-/sodium-universal-3.1.0.tgz#f2fa0384d16b7cb99b1c8551a39cc05391a3ed41"
+  integrity sha512-N2gxk68Kg2qZLSJ4h0NffEhp4BjgWHCHXVlDi1aG1hA3y+ZeWEmHqnpml8Hy47QzfL1xLy5nwr9LcsWAg2Ep0A==
+  dependencies:
+    blake2b "^2.1.1"
+    chacha20-universal "^1.0.4"
+    nanoassert "^2.0.0"
+    resolve "^1.17.0"
+    sha256-universal "^1.1.0"
+    sha512-universal "^1.1.0"
+    siphash24 "^1.0.1"
+    sodium-javascript "~0.8.0"
+    sodium-native "^3.2.0"
+    xsalsa20 "^1.0.0"
 
 sodium-universal@^4.0.0:
   version "4.0.0"
@@ -11723,7 +11737,7 @@ ws@^7.4.6:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
-ws@^8.12.1, ws@^8.13.0:
+ws@^8.13.0:
   version "8.13.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
   integrity sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==

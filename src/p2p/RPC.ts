@@ -31,6 +31,7 @@ class Rpc {
         let otherGraph = Graph.deepCopyFromGraphString(rpcMethod.data[1]);
         console.log("MERGE GRAPH - OTHER GRAPH", otherGraph);
         this.graph.mergeGraphs(otherGraph);
+        this.graph.insertEdge(this.p2p.getPublicAddress(), rpcMethod.data[0]);
         break;
       default:
         throw new Error("Invalid RPC Method");
