@@ -30,39 +30,34 @@ class BrowserP2P {
   }
   public init(graph: Graph) {
     this.rpc = new Rpc(graph, this);
-    this.connectToTopic(this.userID.toString());
-  }
-  public connectToTopic(topic: string) {
-    try {
-      this.swarm.on("connection", (conn: Stream, info: PeerInfo) => {
-        let key = Buffer.from(info.publicKey).toString("hex");
-        this.sockets.set(key, conn);
-        console.log("Connection!", key);
-        conn.on("data", (data) => {
-          data = Buffer.from(data).toString();
-          let rpcMethod: RpcMethod = JSON.parse(data);
-          console.log("Received RPC", data);
-          this.executeMethod(rpcMethod);
-        });
-        conn.on("close", (c) => {
-          let deleted = this.sockets.delete(key);
-          console.log("CLOSE", c, deleted);
-        });
-        this.broadcast({
-          method: "MERGE_GRAPH",
-          data: [
-            this.getPublicAddress(),
-            JSON.stringify(this.rpc.graph),
-            topic,
-          ],
-          isPartOfState: false,
-        });
+    this.swarm.on("connection", (conn: Stream, info: PeerInfo) => {
+      let key = Buffer.from(info.publicKey).toString("hex");
+      this.sockets.set(key, conn);
+      console.log("Connection!", key);
+      conn.on("data", (data) => {
+        data = Buffer.from(data).toString();
+        let rpcMethod: RpcMethod = JSON.parse(data);
+        console.log("Received RPC", data);
+        this.executeMethod(rpcMethod);
       });
-
+      conn.on("close", (c) => {
+        let deleted = this.sockets.delete(key);
+        console.log("CLOSE", c, deleted);
+      });
+      this.broadcast({
+        method: "MERGE_GRAPH",
+        data: [this.getPublicAddress(), JSON.stringify(this.rpc.graph)],
+        isPartOfState: false,
+      });
+    });
+    this.connectToTopic(this.userID.toString(), true);
+  }
+  public connectToTopic(topic: string, server = false) {
+    try {
       // const connTopic = Buffer.alloc(32).fill(userID.toString()); // A topic must be 32 bytes
       const connTopic = Buffer.alloc(32).fill(topic); // A topic must be 32 bytes
       const discovery = this.swarm.join(connTopic, {
-        server: true,
+        server: server,
         client: true,
       });
     } catch (e) {
@@ -82,6 +77,11 @@ class BrowserP2P {
     for (let socket of this.sockets.values()) {
       socket.write(data);
     }
+  }
+  public sendToConnection(rpcMethod: RpcMethod, conn) {
+    let data = JSON.stringify(rpcMethod);
+    console.log("SEND RPC", data);
+    conn.write(data);
   }
   public executeMethod(rpcMethod: RpcMethod) {
     console.log(
