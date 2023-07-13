@@ -13,7 +13,7 @@ const GraphComponent: React.FC<{graph:Graph}> = ({graph}) => {
         },
         tooltip: {
             enabled: true,
-            format: 'Node ID: {%id}\nNode size: {%size}\nCustom data: {%customData}\nobj: {%customObject}',
+            format: 'Discovery ID: {%userID}\nMetadata: {%metadata}',
           }
       }}
         width={'100%'}
