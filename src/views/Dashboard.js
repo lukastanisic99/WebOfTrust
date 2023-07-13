@@ -25,8 +25,10 @@ function Dashboard({ ...props }) {
   console.log("DASHBOARD props ---->", props);
   const acc = props.acc;
   const graph = props.graph;
+  const p2p = props.p2p;
   console.log("ACC PROP PASSED", acc);
   console.log("GRAPH DAHBOARD passed", graph);
+  const [disoveryTopic, setDiscoveryTopic] = React.useState("");
   // let p = new BrowserP2P();
   return (
     <>
@@ -71,7 +73,9 @@ function Dashboard({ ...props }) {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Direct Connections</p>
-                      <Card.Title as="h4">+45K</Card.Title>
+                      <Card.Title as="h4">
+                        {graph.getTotalDirectConnections(acc.publicKey)}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -97,7 +101,9 @@ function Dashboard({ ...props }) {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Total Peers</p>
-                      <Card.Title as="h4">23</Card.Title>
+                      <Card.Title as="h4">
+                        {graph.getTotalPeers() - 1}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -165,10 +171,43 @@ function Dashboard({ ...props }) {
           <Col md="4">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Peer Requests</Card.Title>
-                <p className="card-category">Incoming requests</p>
+                <Card.Title as="h4">Connect</Card.Title>
+                <p className="card-category">Discover your peers</p>
               </Card.Header>
-              <Card.Body></Card.Body>
+              <Card.Body>
+                <Form>
+                  <Row className="justify-content-center">
+                    <Col className="px-1" md="8">
+                      <Form.Group>
+                        {/* <label>Connect with peers</label> */}
+                        <Form.Control
+                          placeholder="Discovery ID"
+                          type="text"
+                          onChange={(event) => {
+                            setDiscoveryTopic(event.target.value);
+                          }}
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-center">
+                    <Col xs="auto">
+                      <br></br>
+                      <Button
+                        className="btn-fill pull-right"
+                        type="button"
+                        variant="info"
+                        onClick={() => {
+                          p2p.connectToTopic(disoveryTopic);
+                        }}
+                      >
+                        CONNECT
+                      </Button>
+                    </Col>
+                  </Row>
+                  <div className="clearfix"></div>
+                </Form>
+              </Card.Body>
             </Card>
           </Col>
         </Row>

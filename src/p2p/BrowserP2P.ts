@@ -10,8 +10,10 @@ class BrowserP2P {
   sockets: Map<string, Stream> = new Map<string, Stream>();
   address: string;
   rpc: Rpc;
+  userID: number;
   public constructor(seed: string, userID: number) {
     // this.rpc = new Rpc(graph, this);
+    this.userID = userID;
     let ws = new WebSocket("wss://dht1-relay.leet.ar:49443/");
     this.dht = new DHT(new Stream(true, ws));
     // this.dht.keyPair(Buffer.alloc(32).fill(seed));
@@ -28,11 +30,14 @@ class BrowserP2P {
   }
   public init(graph: Graph) {
     this.rpc = new Rpc(graph, this);
+    this.connectToTopic(this.userID.toString());
+  }
+  public connectToTopic(topic: string) {
     try {
       this.swarm.on("connection", (conn: Stream, info: PeerInfo) => {
         let key = Buffer.from(info.publicKey).toString("hex");
         this.sockets.set(key, conn);
-        console.log("Connection!");
+        console.log("Connection!", key);
         conn.on("data", (data) => {
           data = Buffer.from(data).toString();
           let rpcMethod: RpcMethod = JSON.parse(data);
@@ -45,13 +50,17 @@ class BrowserP2P {
         });
         this.broadcast({
           method: "MERGE_GRAPH",
-          data: [this.getPublicAddress(), JSON.stringify(this.rpc.graph)],
+          data: [
+            this.getPublicAddress(),
+            JSON.stringify(this.rpc.graph),
+            topic,
+          ],
           isPartOfState: false,
         });
       });
 
       // const connTopic = Buffer.alloc(32).fill(userID.toString()); // A topic must be 32 bytes
-      const connTopic = Buffer.alloc(32).fill("lkjhgf"); // A topic must be 32 bytes
+      const connTopic = Buffer.alloc(32).fill(topic); // A topic must be 32 bytes
       const discovery = this.swarm.join(connTopic, {
         server: true,
         client: true,
@@ -63,6 +72,9 @@ class BrowserP2P {
 
   public getPublicAddress(): string {
     return this.address;
+  }
+  public getUserID(): number {
+    return this.userID;
   }
   public broadcast(rpcMethod: RpcMethod) {
     let data = JSON.stringify(rpcMethod);

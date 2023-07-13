@@ -21,7 +21,7 @@ class Rpc {
   }
   public executeMethod(rpcMethod: RpcMethod) {
     switch (rpcMethod.method) {
-      case "MERGE_GRAPH": // data -- [adr,graph (stringified)]
+      case "MERGE_GRAPH": // data -- [adr,graph (stringified),topic(discoveryID)]
         if (
           !Array.isArray(rpcMethod.data) ||
           typeof rpcMethod.data[0] != "string" ||

@@ -29,8 +29,12 @@ export class Edge {
   }
   public isEqual(other: Edge): boolean {
     if (this.from === other.from || this.from === other.to) {
-      return this.to === other.to || this.to === other.from;
+      if (this.to === other.to || this.to === other.from) {
+        // console.log("Edges isEQUAL", this, other, true);
+        return true;
+      }
     }
+    // console.log("Edges isEQUAL", this, other, false);
     return false;
   }
 }
@@ -52,7 +56,8 @@ class Graph {
     }
     for (let i = 0; i < graphObj.edges.length; i++) {
       let e = graphObj.edges[i];
-      graph.edges.push(new Edge(e.from, e.to));
+      if (graph.verifyEdgePartOfGraph(e.from, e.to))
+        graph.edges.push(new Edge(e.from, e.to));
     }
     return graph;
   }
@@ -96,6 +101,7 @@ class Graph {
       return g;
     }
   }
+
   public insertNode(
     pubKey: string,
     name: string,
@@ -110,8 +116,16 @@ class Graph {
   }
 
   public insertEdge(from: string, to: string) {
-    this.edges.push(new Edge(from, to));
+    let edge = new Edge(from, to);
+    if (this.doesEdgeExists(edge)) return;
+    this.edges.push(edge);
     this.persistGraph();
+  }
+  private doesEdgeExists(edge: Edge) {
+    for (let i = 0; i < this.edges.length; i++) {
+      if (this.edges[i].isEqual(edge)) return true;
+    }
+    return false;
   }
 
   public persistGraph() {
@@ -139,6 +153,7 @@ class Graph {
       }
       if (!found) {
         let o = other.nodes[i];
+        console.log("MERGING NODE ->", o);
         this.insertNode(o.id, o.name, o.userID, o.metadata);
       }
     }
@@ -151,11 +166,45 @@ class Graph {
           break;
         }
       }
-      if (!found) {
+      if (
+        !found &&
+        this.verifyEdgePartOfGraph(other.edges[i].from, other.edges[i].to)
+      ) {
         let o = other.edges[i];
+        console.log("MERGING EDGE ->", o);
         this.insertEdge(o.from, o.to);
       }
     }
+  }
+  public getTotalPeers(): number {
+    return this.nodes.length;
+  }
+  public getTotalDirectConnections(peerAddress: string): number {
+    let cnt = 0;
+    this.edges.forEach((e) => {
+      if (e.from === peerAddress || e.to === peerAddress) {
+        cnt++;
+      }
+    });
+    return cnt;
+  }
+  private verifyEdgePartOfGraph(from: string, to: string): boolean {
+    let found = false;
+    for (let i = 0; i < this.nodes.length; i++) {
+      if (this.nodes[i].id === from) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) return false;
+    found = false;
+    for (let i = 0; i < this.nodes.length; i++) {
+      if (this.nodes[i].id === to) {
+        found = true;
+        break;
+      }
+    }
+    return found;
   }
 }
 
