@@ -145,7 +145,7 @@ function Dashboard({ ...props }) {
           </Col>
         </Row>
         <Row>
-          <Col md="8">
+          <Col md={{ span: 8, order: 1 }} xs={{ span: 12, order: 2 }}>
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Social Graph</Card.Title>
@@ -168,7 +168,7 @@ function Dashboard({ ...props }) {
               </Card.Footer>
             </Card>
           </Col>
-          <Col md="4">
+          <Col md={{ span: 4, order: 2 }} xs={{ span: 12, order: 1 }}>
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Connect</Card.Title>
@@ -177,7 +177,7 @@ function Dashboard({ ...props }) {
               <Card.Body>
                 <Form>
                   <Row className="justify-content-center">
-                    <Col className="px-1" md="8">
+                    <Col className="px-1" md="8" xs="8">
                       <Form.Group>
                         {/* <label>Connect with peers</label> */}
                         <Form.Control
